@@ -21,8 +21,6 @@ date: 19/10/2022
 
 ___
 
-
-
 The proposal *must* include at least the following five sections:
 
 1. **Motivation**: why are you doing your project (personal motivation)? what is the goal of your application? why is it important? what is your hypothesis - an explanation of why your problem is solvable?)
