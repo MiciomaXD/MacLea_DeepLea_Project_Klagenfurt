@@ -1,13 +1,20 @@
-# Proposal
+# Proposal - A Deep Learning approach to DDoS and malicious traffic detection
 
 <div style="text-align: right">
 by Pascoli Massimiliano<br>
 AAU id: 12138922<br>
 e-mail: mapascoli@edu.aau.at<br>
-date: 19/10/2022
+date: 25/10/2022<br><br>
 </div>
 
 ## Motivation
+Internet and its infrastructure, from its birth, has granted almost endless possibilities in the realm of computing being one of the most important inventions of humankind: it is in fact, a powerful tool that potentially everyone can use at a fairly low price and effort. With the passing of time, many more devices were connected to the Net, in particular with the boom of IoT. Many of them serve also in critical tasks and it is crucial that they are reliable and always accessible by teir owner.
+It is also true that with so many machines connected, a consistent part is vulnerable to cyberattacks that are growing in frequency and intensity, because of the valuable information/services stored or provided by computers.
+If for intrusion detection, exploits and misconfiguration of such devices there are easy and applicable solutions (stronger crypto algorithms and passwords, firewalls, keep systems up-to-date, utilizing only trusted software, ...), for DoS and DDoS attacks there are not.
+This kind of attacks are the most common on the Net infrastructure, but there is not a public-domain definitive solution that anyone could implement: this is mainly because they are diverse and because only an early detection and mitigation is possible.
+(D)DoS attacks work either by:
++ flooding a victim of intense, bogus, ad hoc forged traffic, so that after some time it is unable to keep up with the requests degrading the performance also for legitimate requests OR
++ by exploiting inherent vulnerabilities of protocols, for example traffic congestion management of TCP/IP protocol done with time-windows and time-outs.
 
 ## Learning Task
 
