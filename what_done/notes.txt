@@ -1,0 +1,7 @@
+- simple and small mlp model on multiclass no convergence huge loss
+    - eperimented with full relu, full tanh, mixed decreased less loss but huge anyway
+- simple and small mlp model on binary huge loss
+    - more complex mlp model no convergence
+    - anova with same model big loss but >97 accuracy
+    - autoencoder same model comparable to anova
+    - added scheduler and early stopping best model accuracy >99.8
