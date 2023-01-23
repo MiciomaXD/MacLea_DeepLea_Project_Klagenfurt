@@ -1,0 +1,21 @@
+DDoS2019
+|_ train
+   |_ DoS class DNS / BENIGN 1.99GB
+   |_ DoS class LDAP / BENIGN 0.85GB
+   |_ DoS class MSSQL / BENIGN 1.76GB
+   |_ DoS class NetBIOS / BENIGN 1.58GB
+   |_ DoS class NTP / BENIGN 0.60GB
+   |_ DoS class SNMP / BENIGN 2.02GB
+   |_ DoS class SSDP / BENIGN 1.17GB
+   |_ DoS class UDP / BENIGN 1.40GB 
+   |_ DoS class Syn / BENIGN 0.59GB
+   |_ DoS class TFTP / BENIGN 8.66GB
+   |_ DoS class UDPLag / WebDDoS / BENIGN 0.15GB
+|_ test
+   |_ DoS class LDAP / BENIGN 0.81GB
+   |_ DoS class MSSQL / BENIGN 2.22GB
+   |_ DoS class NetBIOS / BENIGN 1.32GB
+   |_ DoS class Portmap / BENIGN 0.07GB
+   |_ DoS class Syn / BENIGN 1.75GB
+   |_ DoS class UDP / BENIGN 1.67GB
+   |_ DoS class UDPLag / BENIGN 0.30GB

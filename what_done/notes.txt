@@ -5,3 +5,8 @@
     - anova with same model big loss but >97 accuracy
     - autoencoder same model comparable to anova
     - added scheduler and early stopping best model accuracy >99.8
+    - refactoring of the code
+-back to multiclass problem
+    - anova no good
+    - AE no good
+    - all that worked for binary in multiclass works? yes high loss but acceptable result
