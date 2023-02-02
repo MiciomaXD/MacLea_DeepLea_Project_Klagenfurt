@@ -14677,7 +14677,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="The-learning-task">The learning task<a class="anchor-link" href="#The-learning-task">&#182;</a></h2><p>ShieldNet aspires to be an effective and efficient tool to detect Denial of Service (DoS) attacks, that would allow a human/machine to take countermeasures manually/automatically with low responsive times. Since the problem is not easy to resolve due to the wide taxonomy of DoS attack techniques, it is beneficial to specify the tuple $\langle Task\_to\_perform, Performance\_measure, Experience\_data\rangle$ that characterize my learning task for the machine learning problem I am going to face with.</p>
+<h2 id="The-learning-task">The learning task<a class="anchor-link" href="#The-learning-task">&#182;</a></h2><p>ShieldNet aspires to be an effective and efficient tool to detect Denial of Service (DoS) attacks, that would allow a human/machine to take countermeasures manually/automatically with low responsive times. Since the problem is not easy to resolve due to the wide taxonomy of DoS attack techniques, it is beneficial to specify the tuple $\langle Task\_to\_perform, Performance\_measure, Experience\_data\rangle$ that characterize the learning task for the machine learning problem I am going to face with.</p>
 <table>
 <thead><tr>
 <th style="text-align:left">⚠️ WARNING</th>
@@ -14700,7 +14700,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Task-to-perform">Task to perform<a class="anchor-link" href="#Task-to-perform">&#182;</a></h3><p>DoS detection via packet flow aggregated metainformation, that is:<br></p>
+<h3 id="Task-to-perform">Task to perform<a class="anchor-link" href="#Task-to-perform">&#182;</a></h3><p>DoS detection via packet flows aggregated metainformation, that is:<br></p>
 <ul>
 <li>the system must be able to distinguish if the connections flows (traditionally identified by tuple $\langle \text{source_ip, source_port, destination_ip, destination_port, protocol} \rangle$) belong to a DoS attack or are just benign traffic. If the flow is malign, possibly know what kind of attack it is (multi-class classification);<ul>
 <li>12 classes present in the datasets used after the initial clean-up, representing 11 different DoS attacks techniques and the normal traffic class</li>
@@ -14774,18 +14774,7 @@ div.jp-OutputPrompt {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="Reminder:-metrics">Reminder: metrics<a class="anchor-link" href="#Reminder:-metrics">&#182;</a></h4><center>
     <img src=".\confusion_matrix.svg" width="40%">
-</center>
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<table>
+</center><table>
 <thead><tr>
 <th style="text-align:left">Metric</th>
 <th style="text-align:left">Meaning</th>
@@ -14875,35 +14864,13 @@ The data was recorded capturing raw packets using <a href="https://www.tcpdump.o
 <h3 id="MCCT-dataset-analysis">MCCT dataset analysis<a class="anchor-link" href="#MCCT-dataset-analysis">&#182;</a></h3><p>The schematic structure of CIC-DDoS2019 dataset is the following:</p>
 <center>
     <img src="./CIC2019_struct.JPG" width="40%">
-</center>
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>As you can see, the raw dataset is difficult to use for at least 4 reasons:</p>
+</center><p>As you can see, the raw dataset is difficult to use for at least 4 reasons:</p>
 <ol>
-<li>BENIGN class is not separated in its own file, but it is mixed with all the other classes in very csv;</li>
+<li>BENIGN class is not separated in its own file, but it is mixed with all the other classes in every csv;</li>
 <li>Not all classes present in the training part are present also in the test part (and vice-versa): the training/test split suggestion is useless for our task, might as well ignore it completely;</li>
 <li>Classes are far from balanced;</li>
 <li>The size of every csv listed ranges from 0.1GB to 8.7GB given a total of 28.9GB: impossible to load all dataset at one or only training/test part to have a more or less complete view.</li>
 </ol>
-
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Classes distribution of CIC-DDoS2019 in detail for point 3 presented previously (training part left, test part right):</p>
 <center>
     <img src=".\CIC2019_distr.png" width="70%">
@@ -14923,18 +14890,7 @@ The data was recorded capturing raw packets using <a href="https://www.tcpdump.o
 <h3 id="Solution-to-MCCT-dataset">Solution to MCCT dataset<a class="anchor-link" href="#Solution-to-MCCT-dataset">&#182;</a></h3><p>Given the dataset in the form described and since my computing power is limited, the solution implemented is to reconstruct a single, unified, balanced dataset cutting down in a <strong>fair</strong> manner all oversized classes, dropping Portmap and WebDDoS classes entirely. Below, a brief data transformation schema is reported:</p>
 <center>
     <img src=".\data_analysis.svg" width="100%">
-</center>
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>The final result is a csv file in which samples belonging to every class are cut down to the number of samples that the least numerous class has.</p>
+</center><p>The final result is a csv file in which samples belonging to every class are cut down to the number of samples that the least numerous class has.</p>
 <p>As a collateral product, not only the dataset has the desiderable properties described, but also is only 0.43GB. This allows me to load all data to main memory at once as a single DataFrame (empirically main memory occupied by DataFrame object is two times the csv file size).</p>
 <p>Every class now has 112731 samples, bringing the total number of samples to $112731 \cdot 12 = 1352772$ as shown below:</p>
 <center>
@@ -14950,22 +14906,11 @@ The data was recorded capturing raw packets using <a href="https://www.tcpdump.o
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Solution-to-BCT-dataset">Solution to BCT dataset<a class="anchor-link" href="#Solution-to-BCT-dataset">&#182;</a></h3><p>Here the problem is slightly different, but the solution and the code used is exactly the same. This dataset is composed by one file only that has all the labeled flows samples I am going to use". This file contains almost the same columns as the MCCT dataset (in the result there will be the same columns exept for different naming conventions...).</p>
+<h3 id="Solution-to-BCT-dataset">Solution to BCT dataset<a class="anchor-link" href="#Solution-to-BCT-dataset">&#182;</a></h3><p>Here the problem is slightly different, but the solution and the code used is exactly the same. This dataset is composed by one file only that has all the labeled flows samples I am going to use. This file contains almost the same columns as the MCCT dataset (in the result there will be the same columns exept for different naming conventions...).</p>
 <p>It also starts pretty balanced as you can see, but its size is prohibitive (6.32GB):</p>
 <center>
     <img src=".\balanced_distr.png">
-</center>
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>After the application of my fair cut utility:</p>
+</center><p>After the application of my fair cut utility:</p>
 <center>
     <img src=".\balanced_distr_total.png">
 </center><p>Unfortunately the resulting size is huge nontheless: 5.12GB for $6274230 \cdot 2 = 12548460$ samples. For initial exploratory tries in PyTorch I will work on a subset of this result csv (around 1000000 samples).</p>
@@ -14980,7 +14925,29 @@ The data was recorded capturing raw packets using <a href="https://www.tcpdump.o
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Literature-overview">Literature overview<a class="anchor-link" href="#Literature-overview">&#182;</a></h2>
+<h2 id="Literature-overview">Literature overview<a class="anchor-link" href="#Literature-overview">&#182;</a></h2><p>This section summarizes the most interesting works on the topic that I could find online and explains some thoughts that I had when choosing what to implement to solve the learning task.</p>
+<p>It seems that in literature two different approaches are mainly used to deal with this learning task:</p>
+<ul>
+<li>classify <strong>every</strong> incoming packet to <em>DoS</em> or <em>benign</em><ul>
+<li><a href="https://mdpi-res.com/d_attachment/electronics/electronics-09-00916/article_deploy/electronics-09-00916.pdf?version=1591017600">Paper#1a</a> with a clever approach to code a single packet to an RGB and grayscale image (considering groups of bytes in packets fields) and apply CNNs to try and do some fast classification at line rate, then comparing results between RGB and greyscale inputs. Results are impressive, in both cases with 99+% accuracy;</li>
+<li><a href="https://www.researchgate.net/publication/339907177_DDoS_attack_detection_and_classification_via_Convolutional_Neural_Network_CNN">Paper#2a</a> similar to <em>Paper#1a</em>, but using a single bit as pixel (images now in black and white). In this case accuracy is slightly lower (always above 99% anyways). Furthermore, the model is larger compared to the smallest model presented in <em>Paper#1a</em> (that is also more accurate). This paper compares results with other ML approaches (e.g. SVM) and shows that already simple DL methods implemented are far superior;</li>
+</ul>
+</li>
+<li>classify <strong>aggregated data of a flow</strong> (flow = multiple packets) in the two classes already mentioned<ul>
+<li><a href="https://www.kaggle.com/code/rayalizing1/binary-classification-using-smote-lstm">Paper#1b</a> using Synthetic Minority Oversampling Technique (SMOTE - the implementation of SMOTE and the functioning presented originally <a href="https://arxiv.org/abs/1106.1813">here</a>) and LSTMs. This is useful when dealing with unbalanced learning: instead of classical oversampling, new "synthetic" samples are generated introducing noise or averaging the already existing samples;</li>
+<li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9398712/">Paper#2b</a> using Graph Attention Networks and extremely recent (16th Aug 2022). View traffic flows as a graph with metrics on the edges that represent the communication flow, then apply GNNs;</li>
+<li><a href="https://link.springer.com/article/10.1007/s00500-021-06608-1">Paper#3b</a> that compares different ML approaches and draws current state of DoS detection techniques providing also numerous datasets to use for the task;</li>
+<li><a href="https://www.mdpi.com/1999-5903/14/8/240">Paper#4b</a> makes use of autoencoders, I tried them in one of my attempts and produced very good (state of the art) results with an extremely simple model.</li>
+</ul>
+</li>
+</ul>
+<p>Given the information presented, I decided to go with the second approach: WHY?</p>
+<ul>
+<li>The model I am going to produce should be able to work online at line rate, not on packet dumps offline (see Small Project in Cybersecurity results when ready). This means it should be as lightweight as possible to not kill packets troughput. Using the first approach would cause an evaluation of the model at every packet: this is too much e.g. in a router.</li>
+<li>Managing flow information is much easier: million of packets can be "compressed" and organized into 80 features without keeping them saved in memory (especially, I can drop the content of the packet entirely). When a packet arrives, I am going to update only counters, means, variances, ... This can be done efficiently with one-pass algorithms.</li>
+<li>The downside is that, in order to use the model in a real world scenario, I need first to aggregate some (many) packets to compute meaningful features values and only then, apply the model. With the other approach I could immediately distinguish a packet as DoS or non-DoS.</li>
+</ul>
+
 </div>
 </div>
 </div>
@@ -14991,30 +14958,96 @@ The data was recorded capturing raw packets using <a href="https://www.tcpdump.o
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">&#182;</a></h2>
+<h2 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">&#182;</a></h2><p>In this section I will present briefly what I tried during my numerous attempts. I will make a digression explaining in detail the best one found for the BCT and MCCT.</p>
+<p>For all models, a standard scaler was fit on training input data and then used first on training data, then on the test set.
+$$\forall i,j \left(x\_scaled_{i,j} = \frac{x\_original_{i,j} - \mu_i}{\sigma_i} \right) \\
+\text{where } i \text{ is a feature and } j \text{ is a sample}$$</p>
+<p>Since the task is classification and not regression, the loss function used is cross-entropy loss combined with logaritmic softmax at the end of every model.
+$$L_{cross-entropy}=-\sum_{i=1}^{n}{t_i \cdot \log(p_i)} \\
+\text{where } t_i \text{ is the ground truth label, } n \text{ number of classes and } p_i \text{ is the softmax probability for the } i^{th} \text{ class}$$</p>
+$$LogSoftmax(x_i)=\log \left( \frac{e^{x_i}}{\sum_j^n e^{x_j}} \right) \\
+\text{where } x_i \text{ is a component of an n-dimensional tensor}$$<p>The optimizer chosen for every model is a pretty standard and popular one with default settings and learning rate (0.001): <a href="https://arxiv.org/abs/1412.6980">Adam</a> (Adaptive Moment Estimation). The value for the learning rate was found empirically after some initial runs on very small models to be good for convergence on the data of both MCCT and BCT datasets.</p>
+<p>In general, datasets were divided as shown below for training, validation and test sets:</p>
+<center>
+    <img src=".\train_test.svg">
+</center>
 </div>
 </div>
 </div>
-</div></section></section><section><section>
+</div></section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Results">Results<a class="anchor-link" href="#Results">&#182;</a></h2>
+<h3 id="First-steps-(%22is-convergence-even-possible?%22)">First steps (<em>"is convergence even possible?"</em>)<a class="anchor-link" href="#First-steps-(%22is-convergence-even-possible?%22)">&#182;</a></h3><table>
+<thead><tr>
+<th style="text-align:left">⚠️ WARNING</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">The results of this stage were bad, but some important discoveries were made for what model morphology is concerned. I didn't use the validation set at all in this early stage!</td>
+</tr>
+</tbody>
+</table>
+<p>For starters, I tried to solve MCCT with really simple models that could be trained easily and in little time. Generally all models were low parameter number MLPs (i.e. Multi-layer Perceptrons with at maximum 128 neurons per layer) interleaved with some sort of activation function and, as mentioned, logarithmic softmax at the end.</p>
+<center>
+    <img src=".\models_struct_first.svg">
+</center><p>Based on epoch loss values trend I could estimate a good learning rate for a solid convergence and the best activation functions (I saw that changing activation functions hugely impacted loss magnitude so I kept the one that minimized it) keeping batch size the same (200). I tried all between Sigmoid, ReLU, GELU, ELU, LeakyReLU, SeLU and, most importantly, Tanh. Tanh is a very sharp activation function that worked well: took initial 6000+ loss to ~3000. Also mixtures were attempted, but didn't work well.</p>
+<center>
+    <img src=".\Sigmoid-Scaled-Exponential-Linear-Unit-SELU-Hyperbolic-tangent-TanH-Rectifier.png">
+</center>
+https://www.researchgate.net/figure/Sigmoid-Scaled-Exponential-Linear-Unit-SELU-Hyperbolic-tangent-TanH-Rectifier_fig1_350125835
+
+The plot below shows loss value using Tanh per epoch:
+
+<center>
+    <img src=".\first_losses.png">
+</center><p>The plot show that learning something in 10 epochs alredy, is indeed possible; code is working as intended, performance on test set (measured <strong>only</strong> by per-class accuracy) is not acceptable: 0% for some classes. Per-class accuracy for class "BENIGN" was the highest among all (by far): this is an indication that there is a clear and recognizable distinction between DoS and BENIGN traffic.</p>
+
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Fallback-plan">Fallback plan<a class="anchor-link" href="#Fallback-plan">&#182;</a></h3><p>To increase performance in the MCCT I tried to create more complex models (in parameters number): that didn't help a lot.</p>
+<p>At this point I started exploring BCT dataset and models to resolve the (possibly) easier task. I started from scratch again with a small MLP model similar to the one used in the first phase (512, 256, 128, 64, 2 neurons in fully connected layers), with Tanh as my only activation function. I also used an "intelligent" feature reduction technique called "ANOVA" (<a href="https://en.wikipedia.org/wiki/Analysis_of_variance">Analysis of Variance</a>).</p>
+<p>To simplify learning I have to remove those features that are independent from the target: how do I find the "dependence"? With ANOVA. ANOVA can be used when one variable is numeric and one is categorical, such as numerical input variables and a classification target variable in a classification task.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#NON-EXECUTABLE CODE SAMPLE </span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectKBest</span><span class="p">,</span> <span class="n">f_classif</span>
+
+<span class="n">X</span><span class="o">=</span><span class="n">df_copy</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'Label'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Y</span><span class="o">=</span><span class="n">df_copy</span><span class="p">[</span><span class="s1">'Label'</span><span class="p">]</span>
+
+<span class="n">fvalue_Best</span> <span class="o">=</span> <span class="n">SelectKBest</span><span class="p">(</span><span class="n">f_classif</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">X_kbest</span> <span class="o">=</span> <span class="n">fvalue_Best</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="n">mask</span><span class="o">=</span><span class="n">fvalue_Best</span><span class="o">.</span><span class="n">get_support</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Remaining columns:'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">m</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">cols</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+<span class="n">X</span><span class="o">=</span><span class="n">X_kbest</span>
 </pre></div>
 </body></html>
 
@@ -15024,29 +15057,106 @@ The data was recorded capturing raw packets using <a href="https://www.tcpdump.o
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
-
-
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>True</pre>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>As provided by <code>sklearn.featture_selection</code> with option <code>f_classif</code>, <code>SelectKBest</code> performs one-way ANOVA F-value test, ignoring constant/categorical feature columns. Using the result of <code>f_classif</code>, keeps highest scoring $k$ features (in my case 20).</p>
+$$F\_score = \frac{\text{variation between sample means (MSB)}}{\text{variation within the samples (MSW)}}$$<p><br><br><br>
+$$MSB = \frac{\text{Sum of squares between the group (SSB)}}{DFb} \\
+\text{where } \\
+SSB = \sum{(X_i – X_t)^2} \text{ with } X_i \text{ mean of group } i \text{ and } X_t \text{ mean of all the observations}\\
+DFb = \text{ degrees of freedom between} = \text{ total number of observations in all the groups } – 1$$
+<br><br><br>
+$$MSW = \frac{\text{Sum of squares within the group (SSW)}}{DFw} \\
+\text{where} \\
+DFw = \text{ degrees of freedom within} = N – K \text{ with } K  \text{ number of groups and } N \text{ total number of observations in all the groups} \\
+SSW = \sum{(X_{i,j} – X_j)^2} \text{ with } X_{i,j} \text{ is the observation of each group } j$$</p>
+<table>
+<thead><tr>
+<th style="text-align:left">⚠️ WARNING</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">An observation is not a sample of the dataset: 1 dataset row with q features has q observations! So $N$ is $\text{number of samples} * \text{number of features (groups)}$ and $K$ is $\text{number of features}$</td>
+</tr>
+</tbody>
+</table>
+<blockquote><p>For details:<br>
+  <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html">https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html</a><br>
+  <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.f_classif">https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.f_classif</a><br>
+  <a href="https://scikit-learn.org/stable/modules/feature_selection.html#univariate-feature-selection">https://scikit-learn.org/stable/modules/feature_selection.html#univariate-feature-selection</a></p>
+</blockquote>
+<p>Training on 20 features only, was extremely beneficial:</p>
+
+<pre><code>Precision:  tensor(0.9968)
+Recall:  tensor(0.9961)
+F1-score:  tensor(0.9965)
+Overall Accuracy:  tensor(0.9965)
+Per class accuracy:  [Benign 0.9968386848929155, DoS 0.9961056200620542]</code></pre>
+<p>BUT MAYBE I CAN DO WITHOUT ANOVA... AUTOENCODERS?</p>
 
 </div>
-
 </div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#NON-EXECUTABLE CODE SAMPLE</span>
+<span class="k">class</span> <span class="nc">ShieldNetAE</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AttackNet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> <span class="c1">#as ANOVA k=20</span>
+            <span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">70</span><span class="p">)</span>
+            <span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">LogSoftmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">encoded</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">decoded</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">classifier</span><span class="p">(</span><span class="n">encoded</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">decoded</span><span class="p">,</span> <span class="n">out</span>
+</pre></div>
+</body></html>
+
+
+     </div>
+</div>
+</div>
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -15057,7 +15167,28 @@ The data was recorded capturing raw packets using <a href="https://www.tcpdump.o
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#NON-EXECUTABLE CODE SAMPLE</span>
+<span class="o">...</span>
+
+<span class="n">criterion1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">criterion2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="o">...</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="n">loader</span><span class="p">:</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="c1"># reset optimizer</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+        <span class="n">decoded</span><span class="p">,</span> <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">loss1</span> <span class="o">=</span> <span class="n">criterion1</span><span class="p">(</span><span class="n">decoded</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">loss2</span> <span class="o">=</span> <span class="n">criterion2</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss1</span><span class="o">+</span><span class="n">loss2</span>
+        
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 </pre></div>
 </body></html>
 
@@ -15067,6 +15198,251 @@ The data was recorded capturing raw packets using <a href="https://www.tcpdump.o
 </div>
 </div>
 
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>With an autoencoder we can simplify the BCT problem and obtain a similar performance to ANOVA in a similar number of epochs, but training <strong>is definitely</strong> slower: I have in fact to train encoder, decoder <strong>and</strong> classifier.</p>
+<p>Loss plot below.</p>
+<center>
+    <img src=".\ae_losses.png">
+</center>
+<pre><code>Per class accuracy:  [Benign 0.9851537051709925, DoS 0.9730514261952932]</code></pre>
+<p>Same ANOVA approach on BCCT resulted in better-than-before, but very low performance, nontheless.</p>
+<p>Loss plot below.</p>
+<center>
+    <img src=".\anova_multi_loss.png">
+</center>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Final-models-and-results">Final models and results<a class="anchor-link" href="#Final-models-and-results">&#182;</a></h2><p>In this section I present the final models so far, that archieved the best performances and could be taken as definitive.</p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="BCT">BCT<a class="anchor-link" href="#BCT">&#182;</a></h3><p>After some more attemps I produced a final model by using:</p>
+<ul>
+<li>ANOVA with k = 20;</li>
+<li>batch size = 100;</li>
+<li><code>torch.nn.init.xavier_uniform_(module.weight)</code> weight initialization (best among default, <code>xavier_normal_</code>, <code>xavier_uniform_</code>, <code>kaiming_uniform_</code>, <code>kaiming_normal_</code>);</li>
+<li>structure reported below;</li>
+<li>50 epochs;</li>
+<li>learning rate = 0.001;</li>
+<li>Adam optimizer with CrossEntropyLoss;</li>
+<li>learning rate optimizer <code>StepLR</code> with step_size = 10, gamma = 0.1;</li>
+<li>a rudimentary early stopping mechanism</li>
+</ul>
+<p>that performed really well.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#NON-EXECUTABLE CODE SAMPLE</span>
+<span class="k">class</span> <span class="nc">AttackNetDefinitive</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AttackNet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">LogSoftmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</body></html>
+
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#NON-EXECUTABLE CODE SAMPLE</span>
+<span class="k">def</span> <span class="nf">init_weights</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">):</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">xavier_uniform_</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">module</span><span class="o">.</span><span class="n">bias</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">module</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">fill_</span><span class="p">(</span><span class="mf">0.0001</span><span class="p">)</span>
+                
+<span class="o">...</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">AttackNet</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">init_weights</span><span class="p">)</span>
+
+<span class="o">...</span>
+</pre></div>
+</body></html>
+
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>In particular, I managed to lower the loss significantly:</p>
+<center>
+    <img src=".\binary_final_train_loss.JPG">
+</center><center>
+    <img src=".\binary_final_val_loss.JPG">
+</center><p>And the performance was sky-high:</p>
+
+<pre><code>Precision:  tensor(0.9995)
+Recall:  tensor(0.9984)
+F1-score:  tensor(0.9989)
+Overall Accuracy:  tensor(0.9989)
+Per class accuracy:  [Benign 0.9994804904170463, DoS 0.998358450377156]</code></pre>
+<center>
+    <img src=".\confusion_binary_final.png">
+</center>
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="MCCT">MCCT<a class="anchor-link" href="#MCCT">&#182;</a></h3><p>The model and the hyperparameters for MCCT are similar to the ones presented for BCT, with some necessary adjustments to the morphology of the ANN. The only difference is that I decided to <strong>not</strong> use ANOVA.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#NON-EXECUTABLE CODE SAMPLE</span>
+<span class="k">class</span> <span class="nc">AttackNet</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">AttackNet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">67</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">LogSoftmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</body></html>
+
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Unlike BCT, MCCT has room for improvement. But, with the help of the scheduler, I managed to find a better local optimum, that is clearly shown in the plots:</p>
+<center>
+    <img src=".\multi_final_train_loss.PNG">
+</center><center>
+    <img src=".\multi_final_val_loss.PNG">
+</center><p>Performance was considerably better than previous attempts, but some classes are very difficult to classify correctly:</p>
+
+<pre><code>Precision:  tensor(0.7203)
+Recall:  tensor(0.6648)
+F1-score:  tensor(0.6208)
+Overall Accuracy:  tensor(0.6648)
+Per class accuracy:  [0.3305182203694387, Benign 0.999355150733516, 0.8797976792621244, 0.7496016712105654, 0.05497496189854126, 0.9750008839857148, 0.9800937237153042, 0.273768573353665, 0.8943164471582236, 0.47682616494931374, 0.9968313046977165, 0.36667516294650987]</code></pre>
+<table>
+<thead><tr>
+<th style="text-align:left">⚠️ WARNING</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Note that, as anticipated, the distinction between DoS and Benign traffic is quite easy to do. This is justified by the almost perfect accuracy for class Benign (99.93%)!</td>
+</tr>
+</tbody>
+</table>
+<center>
+    <img src=".\confusion_multi_final.png">
+</center>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Thank-you-for-the-attention">Thank you for the attention<a class="anchor-link" href="#Thank-you-for-the-attention">&#182;</a></h1>
+</div>
+</div>
+</div>
 </div></section></section>
 </div>
 </div>
