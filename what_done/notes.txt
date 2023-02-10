@@ -10,3 +10,10 @@
     - anova no good
     - AE no good
     - all that worked for binary in multiclass works? yes high loss but acceptable result
+
+
+SEE PRESENTATION
++ anova with multi_blah blah instead of f_classif
++ autoencoder for multiclass
+
+
