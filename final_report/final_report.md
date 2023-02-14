@@ -120,33 +120,148 @@ There is a downside: in order to use the model in a real world scenario, it is n
 
 ## Implementation & results evaluation
 
-we are inline with state of the art performances
+In this section are presented the structure of most important models created in detail and only briefly the ones that allowed exploration of the problem at first. In any case, for an in-depth view, code is available.
+
+The development was done entirely on my local machine. The following are some characteristics of the system:
+
+| Hw                                    | Sw                                                                  |
+| ------------------------------------- | ------------------------------------------------------------------- |
+| CPU: Intel i7-4790K                   | ENV: JupyterNotebook in VisualStudioCode with Python3.9 and Pytorch |
+| RAM: 20GB DDR3                        | SO: Windows10 Home 19045.2486                                       |
+| GPU: NVIDIA GeForce GTX 970 4GB GDDR5 |                                                                     |
+
+Here are some general "implementation fix points" valid for every model produced, from exploration phase to later stages:
+
+- as discussed in previous chapters, data was rescaled using a *StandardScaler*, since feature are very diverse in magnitude one from each other. The scaler was fit on the training set attached to each model, each time;
+- this is a classification task, so at the very end of each model a *LogSoftmax* layer is used (same concept of standard *Softmax*, but numerically more stable);
+- to compare *LogSoftmax* output of a model with a sample's one-hot-represented ground truth, *CrossEntropyLoss* was used (this is suitable both for BCT and MCCT);
+- the available data was always divided following the ratio 75% / 25% for training set and test set respectively. When validation set was also needed, the training set was further split following the 75/25 formula (training set and validation set resp.);
+- for the performance assessment of each model, were used standard performance metrics for classification i.e. *Recall*, *Precision*, *F1-score*, *Accuracy*, *Per-Class Accuracy* in their BCT and MCCT variants;
+- all models are following the structure (with due changes where needed) in the image below
+
+![](E:\tempBig\MLDL%20klagenfurt\MacLea_DeepLea_Project_Klagenfurt\final_report\models_struct_first.svg)
+
+### Exploration
+
+We started with MCCT. The first very few models were very small, plain and simple Multi-Layer Perceptrons with maximum 128 neurons per layer, interleaved with some sort of activation function. These models allowed a fast training and a lot of exploration  with hyperparameters and what activation function to use.
+
+Based on epoch loss values trend it was possible to estimate a good learning rate for a solid convergence and the best activation functions (it was noted that changing activation functions hugely impacted loss magnitude so were kept the ones that minimized it) keeping batch size the same (200). Activation functions tried ranged from Sigmoid to ReLU, GELU, ELU, LeakyReLU, SeLU and, most importantly, Tanh. Tanh is a very sharp activation function that worked well: took initial 6000+ loss to ~3000. Also mixtures were attempted, but didn't work well at this stage.
+
+In general, the slope of the loss stabilized to "flat" in already 10 epochs, but the performance was very low and not acceptable (0% accuracy per some classes). Class *Benign* was the most accurate, this is a sign that the BCT might be very easy because of a clear distinction between normal and abnormal traffic flows.
+
+### ANOVA, MI, Autoencoders
+
+After the first unsuccessful attempts on the MCCT, we moved on BCT. A slightly larger model (`512, ReLU, 256, ReLU, 128, Tanh, 64, Tanh, 2, LogSoftmax`) was capable of reaching state of the art (and above) performance: 
+
+```
+Precision: tensor(0.9968)
+Recall: tensor(0.9961)
+F1-score: tensor(0.9965)
+Overall Accuracy: tensor(0.9965)
+Per class accuracy:  [0.9968386848929155, 0.9961056200620542]
+```
+
+This model was classifying on feature-reduced data. In order to compute the reduction of the features, ANOVA *f-classif* was used (this is to account for possible linear relations between features).
+
+As suggested during the presentation, *mutual-info* (MI) was also tried (for non-linear relations) and the results are reported below:
+
+```
+Precision:  tensor(0.5738)
+Recall:  tensor(0.8635)
+F1-score:  tensor(0.6895)
+Overall Accuracy:  tensor(0.6114)
+Per class accuracy:  [0.35958792553882435, 0.8635462014991844]
+```
+
+MI takes much longer to compute, compared to ANOVA f-score: this is probably because it is based on k-nearest neighbours distances which itself is longer to compute. Performance is considerably lower, starting from different selected features, obviously.
+
+To deal with BCT, also autoencoders were used. A small autoencoder, coupled with the same classifier structure of ANOVA and MI approaches, is capable to reach comparable performance. The drawback is that training is longer and performance is technically less than state of the art:
+
+```
+ Per class accuracy:  [0.9851537051709925, 0.9730514261952932]
+```
+
+### Definitive models
+
+In this section are presented the best models realized for MCCT and BCT. The classifier structure is the same for both tasks: (`512, ReLU, 256, ReLU, 128, Tanh, 64, Tanh, 2, LogSoftmax`). What changed in the training process was the inclusion of weight initialization and learning rate scheduling. A summary of all the hyperparameters is given in the following.
+
+**MCCT v1 there is room for improvement**
+
+Model name:`.\models\12-29-2022_18-50-04__multi_opt_sched.model`
+
+- batch size = 100;
+- `torch.nn.init.xavier_uniform_` weight initialization (best among default, `xavier_normal_`, `xavier_uniform_`, `kaiming_uniform_`, `kaiming_normal_`);
+- structure reported below;
+- 50 epochs;
+- learning rate = 0.001;
+- Adam optimizer with CrossEntropyLoss;
+- learning rate optimizer `StepLR` with step_size = 10, gamma = 0.1;
+- a rudimentary early stopping mechanism
+
+```
+Precision:  tensor(0.7203)
+Recall:  tensor(0.6648)
+F1-score:  tensor(0.6208)
+Overall Accuracy:  tensor(0.6648)
+Per class accuracy:  [0.3305182203694387, 0.999355150733516, 0.8797976792621244, 0.7496016712105654, 0.05497496189854126, 0.9750008839857148, 0.9800937237153042, 0.273768573353665, 0.8943164471582236, 0.47682616494931374, 0.9968313046977165, 0.36667516294650987]
+```
+
+**MCCT v2_AE slightly better**
+
+Model name: `.\models\02-11-2023_13-46-52__multi_AE_opt_sched.model`
+
+- batch size = 100;
+- `torch.nn.init.xavier_uniform_` weight initialization (best among default, `xavier_normal_`, `xavier_uniform_`, `kaiming_uniform_`, `kaiming_normal_`);
+- structure reported below;
+- 50 epochs;
+- learning rate = 0.001;
+- Adam optimizer with CrossEntropyLoss for classifier, MSELoss for autoencoder;
+- learning rate optimizer `StepLR` with step_size = 10, gamma = 0.1;
+- a rudimentary early stopping mechanism
+
+```
+Precision:  tensor(0.7744)
+Recall:  tensor(0.7686)
+F1-score:  tensor(0.7510)
+Overall Accuracy:  tensor(0.7686)
+Per class accuracy:  [0.26696704154397416, 0.9980129865521769, 0.6454481048529933, 0.9373653920841719, 0.9873933073818792, 0.9929778284736579, 0.8541298664594079, 0.15882746714582674, 0.844851601842923, 0.8127564737512382, 0.9923707664884136, 0.7322840228295934]
+```
+
+For what BCT is concerned, since we worked on a subset of all the 12 millions of samples (1 million at first in exploration phase and 5 millions for the definitive model), we would like to know what is the performance is on all the 12 millions samples: this lead to surprising results.
+
+**BCT v1 state of the art and above**
+
+Model name: `.\models\12-21-2022_15-54-25__anova_binary_opt_sched.model`
+
+- ANOVA with k = 20;
+- batch size = 100;
+- `torch.nn.init.xavier_uniform_` weight initialization (best among default, `xavier_normal_`, `xavier_uniform_`, `kaiming_uniform_`, `kaiming_normal_`);
+- structure reported below;
+- 50 epochs;
+- learning rate = 0.001;
+- Adam optimizer with CrossEntropyLoss;
+- learning rate optimizer `StepLR` with step_size = 10, gamma = 0.1;
+- a rudimentary early stopping mechanism
+
+```
+Precision:  tensor(0.9995)
+Recall:  tensor(0.9984)
+F1-score:  tensor(0.9989)
+Overall Accuracy:  tensor(0.9989)
+Per class accuracy:  [Benign 0.9994804904170463, DoS 0.998358450377156]
+```
+
+**BCT v2 test on complete 12 millions samples dataset**
+
+Model name: `.\models\02-10-2023_11-38-49__anova_binary_opt_sched_on_fair.model`
+
+```
+Running accuracy: [0.997919107205187, 0.9962137186555163] . Seen 12548460 samples.
+```
 
 ## Conclusions & future steps
 
----
-
-A report should be a 6-8 pages long document structured as a research paper, as shown below. You may modify this structure, but the suggested list is a good starting point.
-
-# Motivation
-
-describe the problem you are solving, explain why is it important, and provide a short summary of your methods and obtained results.
-
-# Data
-
-describe the data you are using in the project and provide examples. what kind of data you are using, where does it come from? what are the properties of your data, like balance, missing values, scale, etc., and what are you going to do about it? what kind of preprocessing, filtering, augmentation, or other manipulations are you applying in the project? 
-
-# Theoretical part
-
-literature overview: which models from the literature are suitable for this problem given your data and why? which algorithms can be used to train them? how these models are related to your hypothesis? present an overview of your approach: what steps are executed in the learning pipeline? which hyperparameters of the learning algorithm are available and how they can influence the results? You must show that you applied methods considered during the semester to the selected problem. Feel free to include any figures or tables helping to describe your method and compare it with others. If you use information from other sources, please cite it properly.
-
-# Implementation
-
-how did you implement your approach? which tools were used? show interesting snippets or present your algorithms
-
-# Evaluation
-
-present and visualize results of your evaluation, explain what do your results mean, why was your approach successful, why not? compare it to some baseline either implemented yourself or from the literature, blogs, Kaggle, etc.
+model works on paper especially bct but test in real scenario?
 
 # Conclusions
 
